@@ -1,0 +1,25 @@
+<h1>Tous les utilisateurs</h1>
+  <div class="row justify-content-start">
+      <% @users.each do |user| %>
+        <div class="card col-3" style="margin: 15px;">
+          <p><%= user.email %></p>
+          <% if user.has_role? :admin %>
+            <p>Role = admin</p>
+          <% elsif user.has_role? :normal %>
+            <p>Role = normal</p>
+          <% else %>
+            <p>Role = none</p>
+          <% end %>
+          <%= link_to 'Edit', edit_user_path(user) %>
+          <%= link_to 'Destroy', user, method: :delete, data: {confirm: 'Are you sure?'} %>
+        </div>
+      <% end %>  
+  </div>
+
+  <div class="container">
+  <div class="row">
+    <div class="col-1">
+      <%= link_to 'Back', movies_path %>
+    </div>
+  </div>
+</div>

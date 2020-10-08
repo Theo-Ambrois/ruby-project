@@ -1,0 +1,9 @@
+<h1>Profil</h1>
+<div class="card col-3" style="margin: 15px;">
+	<p>Email : <%= @user.email %></p>
+	<p>Nom : <%= @user.name %></p>
+	<p>Prenom :<%= @user.firstname %></p>
+</div>
+
+<%= link_to 'Edit', edit_user_path(@user) %>
+<%= link_to 'Back', movies_path %>

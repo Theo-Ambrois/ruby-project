@@ -1,0 +1,12 @@
+<% if current_user.has_role? :admin %>
+  <h1>Editing Category</h1>
+
+<%= render 'form', category: @category %>
+
+<%= link_to 'Show', @category %> |
+<%= link_to 'Back', categories_path %>
+<% else %>
+  <p> Non autorisé.</p>
+  <%= link_to 'Liste des films', movies_path %>
+
+<% end %>

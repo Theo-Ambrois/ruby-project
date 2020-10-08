@@ -1,0 +1,33 @@
+<p><%= notice %></p>
+<div class="container">
+  <div class="row">
+    <h1>Ma liste de films</h1>
+  </div>
+
+  <div class="row">
+    <div class="col-6">
+      <table class="table">
+        <thead>
+          <th scope="col">Titre</th>
+          <th scope="col">Description</th>
+          <th scope="col">Durée</th>
+          <th></th>
+        </thead>
+        <tbody>
+          <% @movies.each do |movie| %>
+          
+            <tr>
+              <td><%= movie.title %></td>
+              <td><%= movie.description %></td>
+              <td><%= movie.duree %></td>
+              <td><%= link_to 'Rendre', return_movie_path(movie) %></td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h3><%= link_to("Liste des films", movies_path) %></h3>
+</div>
+

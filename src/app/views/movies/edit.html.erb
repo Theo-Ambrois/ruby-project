@@ -1,0 +1,25 @@
+<% if current_user.has_role? :admin %>
+  <div class="container">
+    <div class="row">
+      <h1>Editing Movie</h1>
+    </div>
+  </div>
+  <%= render 'form', movie: @movie %>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-1">
+        <%= link_to 'Show', @movie %>
+      </div>
+      <div class="col-1">
+        <%= link_to 'Back', movies_path %>
+      </div>
+    </div>
+  </div>
+
+<% else %>
+
+  <p> Non autorisé <p>
+
+<% end %>
+

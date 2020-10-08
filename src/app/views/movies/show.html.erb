@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+<div class="container">
+  <div class="row">
+    <div class="card col-12">
+      <p>
+        <strong>Title:</strong>
+        <%= @movie.title %>
+      </p>
+      <p>
+        <strong>Description:</strong>
+        <%= @movie.description %>
+      </p>
+
+      <p>
+        <strong>Duree:</strong>
+        <%= @movie.duree %> minutes
+      </p>
+
+      <p>
+        <strong>Genre:</strong>
+        <%= movie_categories_label(@movie.categories) %>
+      </p>
+
+      <p>
+        <strong>Borrowed:</strong>
+        <%= @movie.quantity %> <%= @movie.quantity > 1 ? 'exemplaires': 'exemplaire' %> de disponible
+      </p>
+      <div class="row">
+        <div class="col-1">
+          <% if current_user.has_role? :admin %>
+            <%= link_to 'Edit', edit_movie_path(@movie) %>
+          <% end %>
+        </div>
+        <div class="col-1">
+          <%= link_to 'Back', movies_path %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+

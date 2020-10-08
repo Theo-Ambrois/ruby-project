@@ -1,0 +1,46 @@
+<p id="notice"><%= notice %></p>
+
+<div class="container">
+  <% if user_signed_in? %>
+    Compte connecté : <%= current_user.email %>
+    <%= link_to("Mon profil", show_user_path(current_user.id)) %>
+    <% if current_user.has_role? :admin %>
+      <%= link_to("Membres", users_path_url) %>
+      <%= link_to("Catégories", categories_path) %>
+    <% end %>
+    <%= link_to("Logout", destroy_user_session_path, method: :delete) %>
+  <% else %>
+    <%= link_to('Login', new_user_session_path) %>
+    </br>
+    <%= link_to('Inscription', new_user_registration_path) %>
+  <% end %>
+  <h1>Tous les films</h1>
+  <div class="row justify-content-center">
+    <% @movies.each do |movie| %>
+      <div class="card col-3" style="margin: 15px;">
+        <div>
+          <h3> <%= movie.title %> </h3>
+          <p> <%= movie.description %> </p>
+          <p> <%= movie.duree %> minutes</p>
+          <p> <%= movie_categories_label(movie.categories) %> </p>
+          <p> <%= movie.quantity %> <%= movie.quantity > 1 ? 'exemplaires' : 'exemplaire' %> de disponible </p>
+          <% if movie.quantity > 0 %>
+            <%= link_to 'Emprunter', borrow_movie_path(movie) %>
+          <% end %>
+          <%= link_to 'Show', movie %>
+          <% if current_user.has_role? :admin %>
+            <%= link_to 'Edit', edit_movie_path(movie) %>
+            <%= link_to 'Destroy', movie, method: :delete, data: {confirm: 'Are you sure?'} %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <br>
+  <% if current_user.has_role? :admin %>
+    <h2><%= link_to 'New Movie', new_movie_path %></h2>
+  <% end %>
+  <h3><%= link_to 'Ma liste de films', list_movie_user_path %></h3>
+</div>
+
+

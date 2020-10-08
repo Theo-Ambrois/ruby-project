@@ -1,0 +1,28 @@
+version: '2'
+services:
+  mariadb:
+    image: 'docker.io/bitnami/mariadb:10.3-debian-10'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+
+  app:
+    tty: true # Enables debugging capabilities when attached to this container.
+    image: docker.io/bitnami/rails:6-debian-10
+    environment:
+      - DATABASE_HOST=mariadb
+      - DATABASE_NAME=my_app_development
+    depends_on:
+      - mariadb
+    ports:
+      - 3214:3000
+    volumes:
+      - ./src:/app
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: pma-ruby
+    depends_on:
+      - mariadb
+    ports:
+      - 8081:80
+    environment:
+      - PMA_ARBITRARY=1
